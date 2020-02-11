@@ -178,9 +178,9 @@ export const refineData = (flattenData, max, height, gap) => {
 }
 
 export const getGuideArray = (max, height, numberOfPoints = 5) => {
+  console.log("max===>",max);
   let x = parseInt(max)
 
-  let arr = []
   let length
   let temp
   let postfix = ''
@@ -217,11 +217,12 @@ export const getGuideArray = (max, height, numberOfPoints = 5) => {
   } else {
     x = 10 * x / first
   }
+  let arr = []
 
-  for (let i = 1; i < numberOfPoints + 1; i++) {
+  for (let i = 1; i < numberOfPoints + 2; i++) {
     let v = x / numberOfPoints * i
     arr.push([v + postfix, v * temp / max * height, 1 * temp / max * height])
-  }
+  } 
 
   return arr
 }
@@ -240,7 +241,7 @@ export const drawYAxis = (color = '#e0e0e0') => {
   )
 }
 
-export const drawYAxisLabels = (arr, height, minValue, color = '#000000', symbol='', leftViewWidth) => {
+export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {}, symbol='', leftViewWidth) => {  
   return (
     <View style={{
       width: leftViewWidth,
@@ -269,7 +270,7 @@ export const drawYAxisLabels = (arr, height, minValue, color = '#000000', symbol
               bottom: v[1] - 5,
               position: 'absolute'
             }}>
-            <Text style={{fontSize: 11, color: color}}>{v[0] + ' ' + symbol}</Text>
+            <Text style={yAxisLabelTextStyle}>{v[0] + ' ' + symbol}</Text>
           </View>
         )
       })}
@@ -333,7 +334,7 @@ export const drawXAxis = (color = '#e0e0e0') => {
     }} />
   )
 }
-export const drawXAxisLabels = (sortedData, gap, color = '#000000', showEvenNumberXaxisLabel) => {
+export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showEvenNumberXaxisLabel) => {
   return (
     <View style={{
       width: '100%',
@@ -342,19 +343,17 @@ export const drawXAxisLabels = (sortedData, gap, color = '#000000', showEvenNumb
       justifyContent:'center'
     }}>
       {sortedData.map((data, i) => {
-        // if (data[3] && i % 2 === 1) {
         if (data['x'] && i % 2 === 1 || !showEvenNumberXaxisLabel) {
           return (
             <View key={'label' + i} style={{
               position: 'absolute',
-              // left: data[0] - gap / 2,
               left: data['gap'] - gap / 2,
               width: gap,
-              alignItems: 'center'
+              alignItems: 'center',
+              minWidth: 40,
             }}>
-              <Text style={{fontSize: 9, color: color}}>
+              <Text style={xAxisLabelTextStyle}>
                 {
-                  // data[3]
                   data['x']
                 }
               </Text>

@@ -144,8 +144,6 @@ class PointChart extends React.Component {
             if (emptyCount === this.state.sortedData.length) {
               return null
             }
-            // console.log('point', selectedIndex, point)
-
             this.setState({
               selectedIndex: selectedIndex
             }, () => {
@@ -344,7 +342,7 @@ class PointChart extends React.Component {
 
               <View style={{flex:1,flexDirection:"column-reverse" }}>
               {this.props.showXAxisLabel && 
-                  drawXAxisLabels(this.state.sortedData[0].data, this.props.gap, this.props.labelColor, this.props.showEvenNumberXaxisLabel)}
+                  drawXAxisLabels(this.state.sortedData[0].data, this.props.gap, this.props.xAxisLabelTextStyle, this.props.showEvenNumberXaxisLabel)}
                 <View ref='chartView' style={styles.chartViewWrapper}>
 
                   {this.props.showYAxis && drawYAxis(this.props.yAxisColor)}
@@ -376,7 +374,7 @@ class PointChart extends React.Component {
           </View>
           <View style={styles.yAxisLabelsWrapper}>
             { this.props.showYAxisLabel && 
-              drawYAxisLabels(this.state.guideArray, this.props.height + 20, this.props.minValue, this.props.labelColor, this.props.yAxisSymbol, this.props.leftViewWidth)}
+              drawYAxisLabels(this.state.guideArray, this.props.height + 20, this.props.minValue, this.props.yAxisLabelTextStyle, this.props.yAxisSymbol, this.props.leftViewWidth)}
            { this.props.showShadow && 
              <RNLinearGradient
              start={ { x: 0, y: 1 } }
