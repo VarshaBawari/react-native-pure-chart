@@ -5,6 +5,8 @@ import {View} from 'react-native'
 import LineChart from './components/line-chart'
 import ColumnChart from './components/column-chart'
 import PieChart from './components/pie-chart'
+import PointChart from './components/point-chart'
+
 export default class PureChart extends React.Component {
   constructor (props) {
     super(props)
@@ -15,6 +17,8 @@ export default class PureChart extends React.Component {
       return <LineChart {...this.props} />
     } else if (this.props.type === 'bar') {
       return <ColumnChart {...this.props} />
+    } else if (this.props.type === 'point') {
+      return <PointChart {...this.props} />
     } else if (this.props.type === 'pie') {
       return <PieChart {...this.props} />
     }

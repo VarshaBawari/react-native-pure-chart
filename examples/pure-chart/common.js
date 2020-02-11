@@ -240,10 +240,10 @@ export const drawYAxis = (color = '#e0e0e0') => {
   )
 }
 
-export const drawYAxisLabels = (arr, height, minValue, color = '#000000', symbol='') => {
+export const drawYAxisLabels = (arr, height, minValue, color = '#000000', symbol='', leftViewWidth) => {
   return (
     <View style={{
-      width: 33 + 5*symbol.length,
+      width: leftViewWidth,
       height: height,
       justifyContent: 'flex-end',
       alignItems: 'flex-end',
@@ -273,7 +273,7 @@ export const drawYAxisLabels = (arr, height, minValue, color = '#000000', symbol
           </View>
         )
       })}
-
+    
     </View>
   )
 }
@@ -282,7 +282,8 @@ export const drawGuideLine = (arr, color = '#e0e0e0') => {
     <View style={{
       width: '100%',
       height: '100%',
-      position: 'absolute'
+      position: 'absolute',
+      backgroundColor:"transparent"
     }}>
 
       {arr.map((v, i) => {
@@ -325,8 +326,10 @@ export const drawXAxis = (color = '#e0e0e0') => {
   return (
     <View style={{
       width: '100%',
-      borderTopWidth: 1,
-      borderTopColor: color
+      position:"absolute",
+      bottom:0,
+      height: 1,
+      backgroundColor: color
     }} />
   )
 }
@@ -334,8 +337,9 @@ export const drawXAxisLabels = (sortedData, gap, color = '#000000', showEvenNumb
   return (
     <View style={{
       width: '100%',
-      paddingVertical: 10,
-      height: 10
+      height: 50,
+      alignItems:'center',
+      justifyContent:'center'
     }}>
       {sortedData.map((data, i) => {
         // if (data[3] && i % 2 === 1) {

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { View, StyleSheet, Animated, ScrollView, Easing, Text } from 'react-native'
 import ColumnChartItem from './column-chart-item'
 import {initData, drawYAxis, drawYAxisLabels, drawGuideLine, numberWithCommas, drawXAxis, drawXAxisLabels} from '../common'
+import RNLinearGradient from 'react-native-linear-gradient';
 
 export default class ColumnChart extends Component {
   constructor (props) {
@@ -149,6 +150,14 @@ export default class ColumnChart extends Component {
         <View style={{paddingRight: 5}}>
           {this.props.showYAxisLabel &&
             drawYAxisLabels(this.state.guideArray, this.props.height + 20, this.props.minValue, this.props.labelColor, this.props.yAxisSymbol)}
+       { this.props.showShadow && 
+             <RNLinearGradient
+             start={ { x: 0, y: 1 } }
+             end={ { x: 1, y: 1 } }
+             colors={ ['#EAEAEA', 'white'] }
+             style={ {width: 15,
+             position: 'relative', height: this.props.height + 20 } }
+           />}
         </View>
         <View style={styles.mainContainer}>
           <ScrollView ref={scrollView => this.scrollView = scrollView} horizontal>

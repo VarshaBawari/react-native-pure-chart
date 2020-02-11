@@ -3,7 +3,9 @@ import { View, TouchableWithoutFeedback, Text, Animated, Easing, ScrollView, Sty
 import {initData, drawYAxis, drawGuideLine, drawYAxisLabels, numberWithCommas, drawXAxis, drawXAxisLabels} from '../common'
 import RNLinearGradient from 'react-native-linear-gradient';
 
-class LineChart extends React.Component {
+
+
+class PointChart extends React.Component {
   constructor (props) {
     super(props)
     let newState = initData(
@@ -168,7 +170,7 @@ class LineChart extends React.Component {
 
   drawPoint (index, point, seriesColor) {
     let key = 'point' + index
-    let size = 8
+    let size = this.props.pointSize
     let color = !seriesColor ? this.props.primaryColor : seriesColor
     if (this.state.selectedIndex === index) {
       color = this.props.selectedColor
@@ -182,6 +184,7 @@ class LineChart extends React.Component {
       }}>
 
         <View style={StyleSheet.flatten([styles.pointWrapper, {
+          borderRadius: size/2,
           width: size + this.state.lineThickness - 2,
           height: size + this.state.lineThickness - 2,
 
@@ -226,7 +229,7 @@ class LineChart extends React.Component {
   drawCoordinates (data, seriesColor, seriesIndex) {
     let result = []
     let lineStyle = {
-      borderColor: !seriesColor ? this.props.primaryColor : seriesColor
+      borderColor: 'transparent'
     }
     let dataLength = data.length
 
@@ -346,9 +349,7 @@ class LineChart extends React.Component {
 
                   {this.props.showYAxis && drawYAxis(this.props.yAxisColor)}
                   
-                  {this.state.sortedData.map((obj, index) => {
-                    console.log("obj=====>",obj);
-                    
+                  {this.state.sortedData.map((obj, index) => {                    
                     return (
                       <Animated.View key={'animated_' + index} style={{
                         marginLeft:10,
@@ -393,7 +394,8 @@ class LineChart extends React.Component {
   }
 }
 
-LineChart.defaultProps = {
+PointChart.defaultProps = {
+  pointSize:10,
   data: [],
   primaryColor: '#297AB1',
   selectedColor: '#FF0000',
@@ -450,7 +452,6 @@ const styles = StyleSheet.create({
   },
   pointWrapper: {
     position: 'absolute',
-    borderRadius: 10,
     borderWidth: 1
   },
   selectedWrapper: {
@@ -478,4 +479,4 @@ const styles = StyleSheet.create({
   tooltipValue: {fontWeight: 'bold', fontSize: 15}
 })
 
-export default LineChart
+export default PointChart
