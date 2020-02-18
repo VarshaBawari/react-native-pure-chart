@@ -11,6 +11,7 @@ class PointChart extends React.Component {
       this.props.height,
       this.props.gap,
       this.props.numberOfYAxisGuideLine,
+      this.props.maxValueOfData
     )
 
     this.state = {
