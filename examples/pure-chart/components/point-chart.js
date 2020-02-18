@@ -335,14 +335,14 @@ class PointChart extends React.Component {
               {drawXAxis(this.props.xAxisColor)}
             </View>
             <ScrollView
-              style={{ flex: 1, backgroundColor: "transparent" }}
+              style={{ flex: 1, backgroundColor: "transparent",paddingLeft: 20  }}
               horizontal
               ref={ref => this.scrollView = ref}
               onContentSizeChange={() => {
                 if (this.props.lineChartScrollToEnd) this.scrollView.scrollToEnd({ animated: false });
               }}>
 
-              <View style={{ flex: 1, flexDirection: "column-reverse" }}>
+              <View style={{ flex: 1, flexDirection: "column-reverse",}}>
                 {this.props.showXAxisLabel &&
                   drawXAxisLabels(this.state.sortedData[0].data, this.props.gap, this.props.xAxisLabelTextStyle, this.props.showEvenNumberXaxisLabel)}
                 <View ref='chartView' style={styles.chartViewWrapper}>

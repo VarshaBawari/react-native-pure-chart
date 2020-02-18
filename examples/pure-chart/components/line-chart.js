@@ -330,7 +330,7 @@ class LineChart extends React.Component {
             {drawXAxis(this.props.xAxisColor)}
           </View>
             <ScrollView
-            style={{flex:1,backgroundColor:"transparent"}}
+            style={{flex:1,backgroundColor:"transparent",paddingLeft: 20 }}
               horizontal
               ref={ref => this.scrollView = ref}
               onContentSizeChange={() => {

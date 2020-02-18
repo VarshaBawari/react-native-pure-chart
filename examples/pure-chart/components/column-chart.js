@@ -172,7 +172,7 @@ export default class ColumnChart extends Component {
             {drawXAxis(this.props.xAxisColor)}
           </View>
           <ScrollView
-            style={{ flex: 1, backgroundColor: "transparent" }}
+            style={{ flex: 1, backgroundColor: "transparent",paddingLeft: 20  }}
             ref={scrollView => this.scrollView = scrollView} 
             horizontal>
             <View style={{ flex: 1, flexDirection: "column-reverse" }}>

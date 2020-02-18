@@ -245,7 +245,6 @@ export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {},
   return (
     <View style={{
       width: leftViewWidth,
-      height: height,
       justifyContent: 'flex-end',
       alignItems: 'flex-end',
       marginBottom: minValue && arr && arr.length > 0 ? -1 * arr[0][2] * minValue : null,
@@ -267,7 +266,7 @@ export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {},
           <View
             key={'guide' + i}
             style={{
-              bottom: v[1],
+              bottom: v[1]-10,
               position: 'absolute'
             }}>
             <Text style={yAxisLabelTextStyle}>{(yAxisValues && yAxisValues.length > i) ? yAxisValues[i] : v[0] + ' ' + symbol}</Text>
@@ -287,9 +286,7 @@ export const drawGuideLine = (arr, color = '#e0e0e0') => {
       backgroundColor: "transparent"
     }}>
 
-      {arr.map((v, i) => {
-        console.log("v=====>",v);
-        
+      {arr.map((v, i) => {        
         return (
           <View
             key={'guide' + i}
@@ -342,14 +339,14 @@ export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showE
       width: '100%',
       height: 50,
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     }}>
       {sortedData.map((data, i) => {
         if (data['x'] && i % 2 === 1 || !showEvenNumberXaxisLabel) {
           return (
             <View key={'label' + i} style={{
               position: 'absolute',
-              left: data['gap'] - gap / 2,
+              left: (data['gap'] - gap / 2) + 10,
               width: gap,
               alignItems: 'center',
               minWidth: 40,
