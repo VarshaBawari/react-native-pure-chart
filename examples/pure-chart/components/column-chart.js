@@ -113,8 +113,6 @@ export default class ColumnChart extends Component {
       } else if (selectedIndex === standardSeries.data.length - 1) {
         plusGap = -50
       }
-      // 차트 width를 마지막에 늘려야겠음.
-
       let left = standardSeries.data[selectedIndex]['gap'] + plusGap
       let tooltipRenders = []
       for (let i = 0; i < this.state.sortedData.length; i++) {
@@ -123,7 +121,7 @@ export default class ColumnChart extends Component {
           tooltipRenders.push(<Text key={'tooltipTitle-' + i} style={styles.tooltipTitle}>{series.data[selectedIndex]['x']}</Text>)
         }
         tooltipRenders.push(
-          <View key={'tooltipText-' + i} style={{ flexDirection: 'row', paddingLeft: 5, alignItems: 'center' }}>
+          <View key={'tooltipText-' + i} style={{ flexDirection: 'row', paddingTop:10, alignItems: 'center' }}>
             <View style={[styles.tooltipColor, { backgroundColor: !series.seriesColor ? this.props.primaryColor : series.seriesColor }]} />
             <Text style={styles.tooltipValue}>{numberWithCommas(series.data[selectedIndex]['y'], false)}</Text>
           </View>
@@ -142,8 +140,6 @@ export default class ColumnChart extends Component {
   }
 
   render() {
-    console.log("guideArray===>", this.state.guideArray);
-
     let { fadeAnim } = this.state
     if (this.state.sortedData && this.state.sortedData.length === 0) return null
 
@@ -224,23 +220,31 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   tooltip: {
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
-    borderColor: '#AAAAAA',
+    opacity: 0.8,
+    borderColor: 'transparent',
     borderWidth: 1,
+    position: 'absolute',
     padding: 3,
-    alignItems: 'center',
+    marginLeft: 5,
     justifyContent: 'center',
-    opacity: 0.8
+    alignItems:'center',
+    width:100,
+    shadowColor: '#00000077',
+    shadowOpacity: 10,
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 10,
   },
-  tooltipTitle: { fontSize: 10 },
+  tooltipTitle: { fontSize: 16, textAlign:'center' ,paddingTop: 10},
   tooltipValue: { fontWeight: 'bold', fontSize: 15 },
   tooltipColor: {
     width: 10,
-    height: 5,
+    height: 10,
     marginRight: 3,
     borderRadius: 2
   }

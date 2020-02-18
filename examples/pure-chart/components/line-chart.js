@@ -281,7 +281,7 @@ class LineChart extends React.Component {
           justifyContent: 'center'
         }])}>
           <View style={StyleSheet.flatten([styles.selectedLine, {
-            backgroundColor: this.props.selectedColor,
+            backgroundColor: "rgba(0,0,0,0.05)",
             marginLeft: gap
           }])} />
 
@@ -293,10 +293,10 @@ class LineChart extends React.Component {
                   {dataObject.x ? (
                     <Text style={styles.tooltipTitle}>{dataObject.x}</Text>
                 ) : null}
-                  <View style={{flexDirection: 'row', paddingLeft: 5, alignItems: 'center'}}>
+                  <View style={{ flexDirection: 'row', paddingTop: 10, alignItems: 'center' }}>
                     <View style={{
                       width: 10,
-                      height: 5,
+                      height: 10,
                       marginRight: 3,
                       borderRadius: 2,
                       backgroundColor: !series.seriesColor ? this.props.primaryColor : series.seriesColor
@@ -464,14 +464,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 5,
     opacity: 0.8,
-    borderColor: '#AAAAAA',
+    borderColor: 'transparent',
     borderWidth: 1,
     position: 'absolute',
     padding: 3,
     marginLeft: 5,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems:'center',
+    width:100,
+    shadowColor: '#00000077',
+    shadowOpacity: 10,
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 10,
   },
-  tooltipTitle: {fontSize: 10},
+  tooltipTitle: { fontSize: 16, textAlign:'center' ,paddingTop: 10},
   tooltipValue: {fontWeight: 'bold', fontSize: 15}
 })
 
