@@ -64,7 +64,7 @@ function getMaxValue(data) {
   return Math.max.apply(null, values)
 }
 
-export const initData = (dataProp, height, gap, numberOfPoints = 5) => {
+export const initData = (dataProp, height, gap, numberOfPoints = 5,maxValueOfData=0) => {
   let guideArray, max, sortedData
   if (!dataProp || !Array.isArray(dataProp) || dataProp.length === 0) {
     return {
@@ -74,7 +74,12 @@ export const initData = (dataProp, height, gap, numberOfPoints = 5) => {
     }
   }
 
-  max = Math.max(getMaxValue(dataProp))
+  console.log("maxValueOfData===>",maxValueOfData);
+
+
+  max = Math.max(maxValueOfData, getMaxValue(dataProp))
+  console.log("maxmax===>",max);
+
   guideArray = getGuideArray(max, height, numberOfPoints)
 
   dataProp = flattenData(dataProp)
