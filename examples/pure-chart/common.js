@@ -1,12 +1,12 @@
 import _ from 'lodash'
 import React from 'react'
-import {View, Text} from 'react-native'
+import { View, Text } from 'react-native'
 
 const SINGLE_SERIES_WITH_NUMBERS = 0
 const SINGLE_SERIES_WITH_OBJECTS = 1
 const MULTI_SERIES = 2
 
-function flattenData (data) {
+function flattenData(data) {
   let numberCount = 0
   let objectWithYCount = 0
   let multiSeriesCount = 0
@@ -38,7 +38,7 @@ function flattenData (data) {
   }
 }
 
-function getMaxValue (data) {
+function getMaxValue(data) {
   let values = []
 
   data.map((value) => {
@@ -178,7 +178,6 @@ export const refineData = (flattenData, max, height, gap) => {
 }
 
 export const getGuideArray = (max, height, numberOfPoints = 5) => {
-  console.log("max===>",max);
   let x = parseInt(max)
 
   let length
@@ -222,7 +221,7 @@ export const getGuideArray = (max, height, numberOfPoints = 5) => {
   for (let i = 1; i < numberOfPoints + 2; i++) {
     let v = x / numberOfPoints * i
     arr.push([v + postfix, v * temp / max * height, 1 * temp / max * height])
-  } 
+  }
 
   return arr
 }
@@ -241,7 +240,7 @@ export const drawYAxis = (color = '#e0e0e0') => {
   )
 }
 
-export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {}, symbol='', leftViewWidth) => {  
+export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {}, symbol = '', leftViewWidth, yAxisValues) => {
   return (
     <View style={{
       width: leftViewWidth,
@@ -249,7 +248,7 @@ export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {},
       justifyContent: 'flex-end',
       alignItems: 'flex-end',
       marginBottom: minValue && arr && arr.length > 0 ? -1 * arr[0][2] * minValue : null,
-      overflow: 'hidden'
+      overflow: 'hidden',
     }}>
 
       {arr.length === 0 ? (
@@ -259,22 +258,22 @@ export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {},
             bottom: 0,
             position: 'absolute'
           }}>
-          <Text style={{fontSize: 11}}>0</Text>
+          <Text style={{ fontSize: 11 }}>0</Text>
         </View>
       ) : arr.map((v, i) => {
-        if (v[1] > height-5) return null
+        if (v[1] > height - 5) return null
         return (
           <View
             key={'guide' + i}
             style={{
-              bottom: v[1] - 5,
+              bottom: v[1],
               position: 'absolute'
             }}>
-            <Text style={yAxisLabelTextStyle}>{v[0] + ' ' + symbol}</Text>
+            <Text style={yAxisLabelTextStyle}>{(yAxisValues && yAxisValues.length > i) ? yAxisValues[i] : v[0] + ' ' + symbol}</Text>
           </View>
         )
       })}
-    
+
     </View>
   )
 }
@@ -284,7 +283,7 @@ export const drawGuideLine = (arr, color = '#e0e0e0') => {
       width: '100%',
       height: '100%',
       position: 'absolute',
-      backgroundColor:"transparent"
+      backgroundColor: "transparent"
     }}>
 
       {arr.map((v, i) => {
@@ -327,8 +326,8 @@ export const drawXAxis = (color = '#e0e0e0') => {
   return (
     <View style={{
       width: '100%',
-      position:"absolute",
-      bottom:0,
+      position: "absolute",
+      bottom: 0,
       height: 1,
       backgroundColor: color
     }} />
@@ -339,8 +338,8 @@ export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showE
     <View style={{
       width: '100%',
       height: 50,
-      alignItems:'center',
-      justifyContent:'center'
+      alignItems: 'center',
+      justifyContent: 'center'
     }}>
       {sortedData.map((data, i) => {
         if (data['x'] && i % 2 === 1 || !showEvenNumberXaxisLabel) {
