@@ -74,11 +74,7 @@ export const initData = (dataProp, height, gap, numberOfPoints = 5, maxValueOfDa
     }
   }
 
-  console.log("maxValueOfData===>",maxValueOfData);
-
-
   max = Math.max(maxValueOfData, getMaxValue(dataProp))
-  console.log("maxmax===>",max);
 
   guideArray = getGuideArray(max, height, numberOfPoints)
 
@@ -292,6 +288,8 @@ export const drawGuideLine = (arr, color = '#e0e0e0') => {
     }}>
 
       {arr.map((v, i) => {
+        console.log("v=====>",v);
+        
         return (
           <View
             key={'guide' + i}
