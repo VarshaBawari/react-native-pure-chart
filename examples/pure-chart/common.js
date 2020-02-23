@@ -96,8 +96,6 @@ export const initData = (dataProp, height, gap, numberOfPoints = 5, maxValueOfDa
 
 export const refineData = (flattenData, max, height, gap) => {
   let result = []
-console.log("flattenData====>",JSON.stringify(flattenData));
-
   flattenData.map((series) => {
     let dataProp = series.data
     let object = {
@@ -155,10 +153,7 @@ console.log("flattenData====>",JSON.stringify(flattenData));
           }
         }
       }
-      dataObject.valueText= dataProp[i].valueText;
-
-      console.log("dataObject======>",dataObject);
-      
+      dataObject.valueText= dataProp[i].valueText;      
       data.push(dataObject)
     }
 
@@ -246,9 +241,7 @@ export const drawYAxis = (color = '#e0e0e0') => {
   )
 }
 
-export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {}, symbol = '', leftViewWidth, yAxisValues, bottom = -10) => {
-  console.log("bottom====>",bottom);
-  
+export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {}, symbol = '', leftViewWidth, yAxisValues, bottom = -10) => {  
   return (
     <View style={{
       width: leftViewWidth,
