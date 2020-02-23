@@ -96,6 +96,7 @@ export const initData = (dataProp, height, gap, numberOfPoints = 5, maxValueOfDa
 
 export const refineData = (flattenData, max, height, gap) => {
   let result = []
+console.log("flattenData====>",JSON.stringify(flattenData));
 
   flattenData.map((series) => {
     let dataProp = series.data
@@ -150,10 +151,14 @@ export const refineData = (flattenData, max, height, gap) => {
             ratioY: dataProp[i].y / maxClone * height,
             x: dataProp[i].x,
             y: dataProp[i].y,
-            isEmpty: isEmpty
+            isEmpty: isEmpty,
           }
         }
       }
+      dataObject.valueText= dataProp[i].valueText;
+
+      console.log("dataObject======>",dataObject);
+      
       data.push(dataObject)
     }
 
@@ -241,7 +246,9 @@ export const drawYAxis = (color = '#e0e0e0') => {
   )
 }
 
-export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {}, symbol = '', leftViewWidth, yAxisValues) => {
+export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {}, symbol = '', leftViewWidth, yAxisValues, bottom = -10) => {
+  console.log("bottom====>",bottom);
+  
   return (
     <View style={{
       width: leftViewWidth,
@@ -266,7 +273,7 @@ export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {},
           <View
             key={'guide' + i}
             style={{
-              bottom: v[1]-10,
+              bottom: v[1]+bottom,
               position: 'absolute'
             }}>
             <Text style={yAxisLabelTextStyle}>{(yAxisValues && yAxisValues.length > i) ? yAxisValues[i] : v[0] + ' ' + symbol}</Text>

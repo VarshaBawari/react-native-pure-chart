@@ -150,7 +150,7 @@ export default class ColumnChart extends Component {
       }])}>
         <View style={styles.yAxisLabelsWrapper}>
           {this.props.showYAxisLabel &&
-            drawYAxisLabels(this.state.guideArray, this.props.height +20+50, this.props.minValue, this.props.yAxisLabelTextStyle, this.props.yAxisSymbol, this.props.leftViewWidth)}
+            drawYAxisLabels(this.state.guideArray, this.props.height +20+50, this.props.minValue, this.props.yAxisLabelTextStyle, this.props.yAxisSymbol, this.props.leftViewWidth,[],30)}
           {this.props.showShadow &&
             <RNLinearGradient
               start={{ x: 0, y: 1 }}

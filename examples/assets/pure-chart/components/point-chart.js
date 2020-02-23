@@ -263,6 +263,8 @@ class PointChart extends React.Component {
   drawSelected(index) {
     if (this.state.sortedData.length === 0) return null
     let data = this.state.sortedData[0].data
+    console.log("data=====>",data);
+    
     let dataObject = data[index]
 
     if (typeof (this.state.selectedIndex) === 'number' && this.state.selectedIndex >= 0) {
@@ -281,6 +283,8 @@ class PointChart extends React.Component {
       if (bottom > this.props.height * 2 / 3) {
         reverse = false
       }
+      console.log("dataObject.valueText====>",dataObject.valueText);
+      
 
       return (
         
@@ -309,7 +313,7 @@ class PointChart extends React.Component {
                       borderRadius: 2,
                       backgroundColor: !series.seriesColor ? this.props.primaryColor : series.seriesColor
                     }} />
-                    <Text style={styles.tooltipValue}>{this.props.yAxisValues.length>0?this.props.yAxisValues[index]:numberWithCommas(dataObject.y, false)}</Text>
+                    <Text style={styles.tooltipValue}>{(dataObject.valueText !== "" && dataObject.valueText.length>0)?dataObject.valueText:numberWithCommas(dataObject.y, false)}</Text>
                   </View>
                 </View>                
               )
