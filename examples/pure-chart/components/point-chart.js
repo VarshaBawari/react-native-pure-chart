@@ -294,13 +294,8 @@ class PointChart extends React.Component {
           }])} />
 
           <View style={StyleSheet.flatten([styles.selectedBox])}>
-            {this.state.sortedData.map((series) => {              
+            {this.state.sortedData.map((series) => {
               let dataObject = series.data[this.state.selectedIndex]
-              let reversedYAxisValue = this.props.yAxisValues;
-              if (reversedYAxisValue.length>0){
-                reversedYAxisValue = reversedYAxisValue.slice().reverse()
-              }
-              
               return (
                   <View key={series.seriesName}>
                   {dataObject.x ? (
@@ -314,7 +309,7 @@ class PointChart extends React.Component {
                       borderRadius: 2,
                       backgroundColor: !series.seriesColor ? this.props.primaryColor : series.seriesColor
                     }} />
-                    <Text style={styles.tooltipValue}>{this.props.yAxisValues.length>0?reversedYAxisValue[index]:numberWithCommas(dataObject.y, false)}</Text>
+                    <Text style={styles.tooltipValue}>{this.props.yAxisValues.length>0?this.props.yAxisValues[index]:numberWithCommas(dataObject.y, false)}</Text>
                   </View>
                 </View>                
               )
