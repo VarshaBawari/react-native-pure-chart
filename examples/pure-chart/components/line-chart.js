@@ -281,7 +281,7 @@ class LineChart extends React.Component {
           justifyContent: 'center'
         }])}>
           <View style={StyleSheet.flatten([styles.selectedLine, {
-            backgroundColor: "rgba(0,0,0,0.05)",
+            backgroundColor: "rgba(0,0,0,0)",
             marginLeft: gap
           }])} />
 

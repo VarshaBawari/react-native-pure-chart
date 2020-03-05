@@ -283,8 +283,6 @@ class PointChart extends React.Component {
       if (bottom > this.props.height * 2 / 3) {
         reverse = false
       }
-      console.log("dataObject.valueText====>",dataObject.valueText);
-      
 
       return (
         
@@ -293,7 +291,7 @@ class PointChart extends React.Component {
           justifyContent: 'center'
         }])}>
           <View style={StyleSheet.flatten([styles.selectedLine, {
-            backgroundColor: "rgba(0,0,0,0.05)",
+            backgroundColor: "rgba(0,0,0,0)",
             marginLeft: gap
           }])} />
 
