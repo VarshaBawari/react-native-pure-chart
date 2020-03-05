@@ -262,9 +262,7 @@ class PointChart extends React.Component {
 
   drawSelected(index) {
     if (this.state.sortedData.length === 0) return null
-    let data = this.state.sortedData[0].data
-    console.log("data=====>",data);
-    
+    let data = this.state.sortedData[0].data    
     let dataObject = data[index]
 
     if (typeof (this.state.selectedIndex) === 'number' && this.state.selectedIndex >= 0) {
