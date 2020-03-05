@@ -267,9 +267,10 @@ export const drawYAxisLabels = (arr, height, minValue, yAxisLabelTextStyle = {},
             key={'guide' + i}
             style={{
               bottom: v[1]+bottom,
-              position: 'absolute'
+              position: 'absolute',
+              
             }}>
-            <Text style={yAxisLabelTextStyle}>{(yAxisValues && yAxisValues.length > i) ? yAxisValues[i] : v[0] + ' ' + symbol}</Text>
+            <Text style={{...yAxisLabelTextStyle,textAlign:'right'}}>{(yAxisValues && yAxisValues.length > i) ? yAxisValues[i] : v[0] + ' ' + symbol}</Text>
           </View>
         )
       })}

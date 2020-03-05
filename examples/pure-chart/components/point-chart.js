@@ -392,7 +392,7 @@ class PointChart extends React.Component {
                 colors={['#EAEAEA', 'white']}
                 style={{
                   width: 15,
-                  position: 'absolute', top: 0, left: this.props.leftViewWidth + 15, right: 0, bottom: 0, height: this.props.height + 20 + 50
+                  position: 'absolute', top: -20, left: this.props.leftViewWidth + 15, right: 0, bottom: 0, height: this.props.height + 20 + 50 + 20
                 }}
               />}
           </View>
@@ -428,12 +428,13 @@ PointChart.defaultProps = {
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    paddingTop:20
   },
   yAxisLabelsWrapper: {
     paddingRight: 5,
     flexDirection: 'row',
-    paddingBottom: 50
+    paddingBottom: 50,
   },
   chartViewWrapper: {
     flexDirection: 'row',

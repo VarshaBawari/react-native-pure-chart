@@ -113,7 +113,7 @@ export default class ColumnChart extends Component {
       } else if (selectedIndex === standardSeries.data.length - 1) {
         plusGap = -50
       }
-      let left = standardSeries.data[selectedIndex]['gap'] + plusGap
+      let left = standardSeries.data[selectedIndex]['gap'] + plusGap +60
       let tooltipRenders = []
       for (let i = 0; i < this.state.sortedData.length; i++) {
         let series = this.state.sortedData[i]
@@ -146,7 +146,7 @@ export default class ColumnChart extends Component {
     return (
       <View style={StyleSheet.flatten([styles.wrapper, {
         backgroundColor: this.props.backgroundColor,
-        height:this.props.height + 100
+        height:this.props.height + 100 +20
       }])}>
         <View style={styles.yAxisLabelsWrapper}>
           {this.props.showYAxisLabel &&
@@ -158,7 +158,7 @@ export default class ColumnChart extends Component {
               colors={['#EAEAEA', 'white']}
               style={{
                 width: 15,
-                position: 'absolute', top: 0, left: this.props.leftViewWidth + 15, right: 0, bottom: 0, height: this.props.height + 20 + 50
+                position: 'absolute', top: 0, left: this.props.leftViewWidth + 15, right: 0, bottom: 0, height: this.props.height + 20 + 50 +20+40
               }}
             />}
         </View>
