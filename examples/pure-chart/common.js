@@ -334,7 +334,7 @@ export const drawXAxis = (color = '#e0e0e0') => {
     }} />
   )
 }
-export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showEvenNumberXaxisLabel) => {  
+export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showEvenNumberXaxisLabel) => {   
   return (
     <View style={{
       width: '100%',
@@ -343,7 +343,7 @@ export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showE
       justifyContent: 'center',
     }}>
       {sortedData.map((data, i) => {
-        if (data['x'] && i % 2 === 1 || !showEvenNumberXaxisLabel) {
+        if (data['x'] && (i % 2 === 1 || !showEvenNumberXaxisLabel || sortedData.length == 1)) {
           return (
             <View key={'label' + i} style={{
               position: 'absolute',

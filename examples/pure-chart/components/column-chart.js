@@ -148,7 +148,7 @@ export default class ColumnChart extends Component {
         justifyContent: 'center',
       }}>
         {sortedData.map((data, i) => {
-          if (data['x'] && i % 2 === 1 || !showEvenNumberXaxisLabel) {
+          if (data['x'] && (i % 2 === 1 || !showEvenNumberXaxisLabel || sortedData.length == 1)) {
             return (
               <View key={'label' + i} style={{
                 position: 'absolute',
