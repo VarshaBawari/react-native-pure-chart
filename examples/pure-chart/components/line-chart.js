@@ -289,11 +289,11 @@ class LineChart extends React.Component {
             {this.state.sortedData.map((series) => {
               let dataObject = series.data[this.state.selectedIndex]
               return (
-                <View key={series.seriesName}>
+                <View key={series.seriesName} style={{height:"100%",width:"100%"}}>
                   {dataObject.x ? (
                     <Text style={styles.tooltipTitle}>{dataObject.x}</Text>
                 ) : null}
-                  <View style={{ flexDirection: 'row', paddingTop: 10, alignItems: 'center' }}>
+                  <View style={{ flexDirection: 'row', paddingTop: 10, alignItems: 'center',height:"100%",width:"100%" }}>
                     <View style={{
                       width: 10,
                       height: 10,
@@ -466,12 +466,10 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     borderColor: 'transparent',
     borderWidth: 1,
-    position: 'absolute',
-    padding: 3,
-    marginLeft: 5,
+    padding: 10,
     justifyContent: 'center',
     alignItems:'center',
-    width:100,
+    maxHeight:100,
     shadowColor: '#00000077',
     shadowOpacity: 10,
     shadowRadius: 2,
@@ -479,7 +477,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   tooltipTitle: { fontSize: 16, textAlign:'center' ,paddingTop: 10},
-  tooltipValue: {fontWeight: 'bold', fontSize: 15}
+  tooltipValue: { fontWeight: 'bold', fontSize: 15, height:"100%",width:"100%",textAlignVertical:'center' }
 })
 
 export default LineChart

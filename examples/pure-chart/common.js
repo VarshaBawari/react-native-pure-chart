@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 
 const SINGLE_SERIES_WITH_NUMBERS = 0
 const SINGLE_SERIES_WITH_OBJECTS = 1
@@ -334,7 +334,7 @@ export const drawXAxis = (color = '#e0e0e0') => {
     }} />
   )
 }
-export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showEvenNumberXaxisLabel) => {
+export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showEvenNumberXaxisLabel) => {  
   return (
     <View style={{
       width: '100%',
@@ -347,10 +347,10 @@ export const drawXAxisLabels = (sortedData, gap, xAxisLabelTextStyle = {}, showE
           return (
             <View key={'label' + i} style={{
               position: 'absolute',
-              left: (data['gap'] - gap / 2) + 10,
-              width: gap,
+              left: (data['gap'] - gap / 2) + (i==0?15:10),
+              width: gap>70?gap:70,
               alignItems: 'center',
-              minWidth: 40,
+              minWidth: 70,
             }}>
               <Text style={xAxisLabelTextStyle}>
                 {

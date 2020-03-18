@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { View, StyleSheet, Animated, ScrollView, Easing, Text } from 'react-native'
 import ColumnChartItem from './column-chart-item'
-import { initData, drawYAxis, drawYAxisLabels, drawGuideLine, numberWithCommas, drawXAxis, drawXAxisLabels } from '../common'
+import { initData, drawYAxis, drawYAxisLabels, drawGuideLine, numberWithCommas, drawXAxis } from '../common'
 import RNLinearGradient from 'react-native-linear-gradient';
 
 export default class ColumnChart extends Component {
@@ -118,17 +118,17 @@ export default class ColumnChart extends Component {
       for (let i = 0; i < this.state.sortedData.length; i++) {
         let series = this.state.sortedData[i]
         if (series.data[selectedIndex]['x']) {
-          tooltipRenders.push(<Text key={'tooltipTitle-' + i} style={styles.tooltipTitle}>{series.data[selectedIndex]['x']}</Text>)
+          tooltipRenders.push(<Text key={'tooltipTitle-' + i} style={{...styles.tooltipTitle,marginTop:20,}}>{series.data[selectedIndex]['x']}</Text>)
         }
         tooltipRenders.push(
-          <View key={'tooltipText-' + i} style={{ flexDirection: 'row', paddingTop:10, alignItems: 'center' }}>
+          <View key={'tooltipText-' + i} style={{ flexDirection: 'row', padding:10, alignItems: 'center',height:"100%",width:"100%", }}>
             <View style={[styles.tooltipColor, { backgroundColor: !series.seriesColor ? this.props.primaryColor : series.seriesColor }]} />
             <Text style={styles.tooltipValue}>{numberWithCommas(series.data[selectedIndex]['y'], false)}</Text>
           </View>
         )
       }
       return (
-        <View style={[styles.tooltipWrapper, { left: left }]}>
+        <View style={[styles.tooltipWrapper, { left: left,  }]}>
           <View style={styles.tooltip}>
             {tooltipRenders}
           </View>
@@ -137,6 +137,39 @@ export default class ColumnChart extends Component {
     } else {
       return null
     }
+  }
+
+  drawXAxisLabels(sortedData, gap, xAxisLabelTextStyle = {}, showEvenNumberXaxisLabel){  
+    return (
+      <View style={{
+        width: '100%',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        {sortedData.map((data, i) => {
+          if (data['x'] && i % 2 === 1 || !showEvenNumberXaxisLabel) {
+            return (
+              <View key={'label' + i} style={{
+                position: 'absolute',
+                left: (data['gap'] - gap / 2),
+                width: gap>70?gap:70,
+                alignItems: 'center',
+                minWidth: 70,
+              }}>
+                <Text style={xAxisLabelTextStyle}>
+                  {
+                    data['x']
+                  }
+                </Text>
+              </View>
+            )
+          } else {
+            return null
+          }
+        })}
+      </View>
+    )
   }
 
   render() {
@@ -168,12 +201,12 @@ export default class ColumnChart extends Component {
             {drawXAxis(this.props.xAxisColor)}
           </View>
           <ScrollView
-            style={{ flex: 1, backgroundColor: "transparent",paddingLeft: 20  }}
+            style={{ flex: 1, backgroundColor: "transparent",paddingLeft: 10  }}
             ref={scrollView => this.scrollView = scrollView} 
             horizontal>
             <View style={{ flex: 1, flexDirection: "column-reverse" }}>
               {this.props.showXAxisLabel &&
-                drawXAxisLabels(this.state.sortedData[0].data, this.state.gap, this.props.xAxisLabelTextStyle, this.props.showEvenNumberXaxisLabel)}
+                this.drawXAxisLabels(this.state.sortedData[0].data, this.state.gap, this.props.xAxisLabelTextStyle, this.props.showEvenNumberXaxisLabel)}
 
               <View ref='chartView' style={styles.chartContainer}>
               {this.props.showYAxis && drawYAxis(this.props.yAxisColor)}
@@ -181,8 +214,9 @@ export default class ColumnChart extends Component {
                 {this.renderColumns(fadeAnim)}
               </View>
             </View>
-            {this.drawTooltip(this.state.selectedIndex)}
+            
           </ScrollView>
+          {this.drawTooltip(this.state.selectedIndex)}
         </View>
       </View>
     )
@@ -233,7 +267,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     justifyContent: 'center',
     alignItems:'center',
-    width:100,
+    maxHeight:100,
     shadowColor: '#00000077',
     shadowOpacity: 10,
     shadowRadius: 2,
@@ -241,12 +275,12 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   tooltipTitle: { fontSize: 16, textAlign:'center' ,paddingTop: 10},
-  tooltipValue: { fontWeight: 'bold', fontSize: 15 },
+  tooltipValue: { fontWeight: 'bold', fontSize: 15,height:"100%",width:"100%", textAlignVertical:'center',marginRight:10,},
   tooltipColor: {
     width: 10,
     height: 10,
     marginRight: 3,
-    borderRadius: 2
+    borderRadius: 2,
   }
 })
 
