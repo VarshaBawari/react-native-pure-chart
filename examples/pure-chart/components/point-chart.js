@@ -294,23 +294,24 @@ class PointChart extends React.Component {
           }])} />
 
           <View style={StyleSheet.flatten([styles.selectedBox])}>
-            {this.state.sortedData.map((series) => {
+            {this.state.sortedData.map((series,index) => {
               let dataObject = series.data[this.state.selectedIndex]
               
               return (
-                  <View key={series.seriesName} style={{height:"100%",width:"100%"}}>
-                  {dataObject.x ? (
+                  <View key={series.seriesName} style={{height:`${100/(index+1)}%`,width:"100%"}}>
+                  {index == 0 && dataObject.x ? (
                     <Text style={styles.tooltipTitle}>{dataObject.x}</Text>
                   ) : null}
                   <View style={{ flex:1,flexDirection: 'row', paddingTop: 10, alignItems: 'center' ,height:"100%",width:"100%"}}>
                   <View style={{
+                    alignSelf:'center',
                       width: 10,
                       height: 10,
                       marginRight: 3,
                       borderRadius: 2,
                       backgroundColor: !series.seriesColor ? this.props.primaryColor : series.seriesColor
                     }} />
-                    <Text style={styles.tooltipValue}>{(dataObject.valueText !== "" && dataObject.valueText.length>0)?dataObject.valueText:numberWithCommas(dataObject.y, false)}</Text>
+                    <Text style={{...styles.tooltipValue}}>{(dataObject.valueText !== "" && dataObject.valueText.length>0)?dataObject.valueText:numberWithCommas(dataObject.y, false)}</Text>
                   </View>
                 </View>                
               )
