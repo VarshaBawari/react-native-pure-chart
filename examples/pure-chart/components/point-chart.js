@@ -11,11 +11,10 @@ class PointChart extends React.Component {
       this.props.height,
       this.props.gap,
       this.props.numberOfYAxisGuideLine,
-      this.props.maxValueOfData
+      this.props.maxValueOfData,
     )
 
     this.state = {
-      hideToolTip:false,
       loading: false,
       sortedData: newState.sortedData,
       selectedIndex: null,
@@ -173,10 +172,12 @@ class PointChart extends React.Component {
     let key = 'point' + index
     let size = this.props.pointSize
     let color = !seriesColor ? this.props.primaryColor : seriesColor
-    if (this.state.selectedIndex === index) {
-      color = this.props.selectedColor
+    if(this.props.showToolTip){
+      if (this.state.selectedIndex === index) {
+        color = this.props.selectedColor
+      }
     }
-
+    
     if (point.isEmpty || this.props.hidePoints) return null
 
     return (
@@ -371,7 +372,7 @@ class PointChart extends React.Component {
                       </Animated.View>
                     )
                   })}
-                  {this.drawSelected(this.state.selectedIndex)}
+                  {this.props.showToolTip && this.drawSelected(this.state.selectedIndex)}
 
                 </View>
 
@@ -421,6 +422,7 @@ PointChart.defaultProps = {
   },
   numberOfYAxisGuideLine: 5,
   yAxisValues: [],
+  showToolTip: false
 }
 
 const styles = StyleSheet.create({

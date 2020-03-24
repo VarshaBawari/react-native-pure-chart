@@ -71,7 +71,7 @@ export default class ColumnChart extends Component {
             defaultHeight={this.props.height + 20}
             defaultMargin={this.props.defaultColumnMargin}
             defaultBorderColor={this.props.defaultBorderColor}
-            isSelected={this.state.selectedIndex === i}
+            isSelected={this.props.showToolTip && this.state.selectedIndex === i}
             highlightColor={this.props.highlightColor}
             onClick={(evt) => this.handleClick(evt, i)}
             primaryColor={this.props.primaryColor} />
@@ -148,7 +148,7 @@ export default class ColumnChart extends Component {
         justifyContent: 'center',
       }}>
         {sortedData.map((data, i) => {
-          if (data['x'] && (i % 2 === 1 || !showEvenNumberXaxisLabel || sortedData.length == 1)) {
+          if (data['x'] && i % 2 === 1 || !showEvenNumberXaxisLabel) {
             return (
               <View key={'label' + i} style={{
                 position: 'absolute',
@@ -216,7 +216,7 @@ export default class ColumnChart extends Component {
             </View>
             
           </ScrollView>
-          {this.drawTooltip(this.state.selectedIndex)}
+          {this.props.showToolTip && this.drawTooltip(this.state.selectedIndex)}
         </View>
       </View>
     )
@@ -300,5 +300,6 @@ ColumnChart.defaultProps = {
   initialScrollTimeOut: 300,
   showYAxisLabel: true,
   showXAxisLabel: true,
-  yAxisSymbol: ''
+  yAxisSymbol: '',
+  showToolTip: false
 }

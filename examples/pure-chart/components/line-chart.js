@@ -168,10 +168,12 @@ class LineChart extends React.Component {
     let key = 'point' + index
     let size = this.props.pointSize
     let color = !seriesColor ? this.props.primaryColor : seriesColor
-    if (this.state.selectedIndex === index) {
-      color = this.props.selectedColor
+    if(this.props.showToolTip){
+      if (this.state.selectedIndex === index) {
+        color = this.props.selectedColor
+      }
     }
-
+    
     if (point.isEmpty || this.props.hidePoints) return null
 
     return (
@@ -360,7 +362,7 @@ class LineChart extends React.Component {
                       </Animated.View>
                     )
                   })}
-                  {this.drawSelected(this.state.selectedIndex)}
+                  {this.props.showToolTip && this.drawSelected(this.state.selectedIndex)}
 
                 </View>
 
@@ -406,7 +408,9 @@ LineChart.defaultProps = {
   onPointClick: (point) => {
 
   },
-  numberOfYAxisGuideLine: 5
+  numberOfYAxisGuideLine: 5,
+  showToolTip: false
+
 }
 
 const styles = StyleSheet.create({
