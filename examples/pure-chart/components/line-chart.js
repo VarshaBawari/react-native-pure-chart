@@ -373,8 +373,8 @@ class LineChart extends React.Component {
           </View>
           <View style={styles.yAxisLabelsWrapper}>
             { this.props.showYAxisLabel && 
-              drawYAxisLabels(this.state.guideArray, this.props.height + 20, this.props.minValue, this.props.yAxisLabelTextStyle, this.props.yAxisSymbol, this.props.leftViewWidth)}
-           { this.props.showShadow && 
+              drawYAxisLabels(this.state.guideArray, this.props.height + 20, this.props.minValue, this.props.yAxisLabelTextStyle, this.props.yAxisSymbol, this.props.leftViewWidth, this.props.yAxisValues)}
+            { this.props.showShadow && 
              <RNLinearGradient
              start={ { x: 0, y: 1 } }
              end={ { x: 1, y: 1 } }
