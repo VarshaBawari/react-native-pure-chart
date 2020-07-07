@@ -6,11 +6,14 @@ import RNLinearGradient from 'react-native-linear-gradient';
 class LineChart extends React.Component {
   constructor (props) {
     super(props)
-    let newState = initData(
-      this.props.data, 
-      this.props.height, 
-      this.props.gap, 
-      this.props.numberOfYAxisGuideLine)
+
+      let newState = initData(
+        this.props.data,
+        this.props.height,
+        this.props.gap,
+        this.props.numberOfYAxisGuideLine,
+        this.props.maxValueOfData,
+      )
     this.state = {
       loading: false,
       sortedData: newState.sortedData,
@@ -303,7 +306,7 @@ class LineChart extends React.Component {
                       borderRadius: 2,
                       backgroundColor: !series.seriesColor ? this.props.primaryColor : series.seriesColor
                     }} />
-                    <Text style={styles.tooltipValue}>{numberWithCommas(dataObject.y, false)}</Text>
+                    <Text style={styles.tooltipValue}>{(dataObject.valueText !== "" && dataObject.valueText.length>0)?dataObject.valueText:numberWithCommas(dataObject.y, false)}</Text>
                   </View>
                 </View>
               )
@@ -409,8 +412,8 @@ LineChart.defaultProps = {
 
   },
   numberOfYAxisGuideLine: 5,
-  showToolTip: false
-
+  showToolTip: false,
+  yAxisValues: [],
 }
 
 const styles = StyleSheet.create({
