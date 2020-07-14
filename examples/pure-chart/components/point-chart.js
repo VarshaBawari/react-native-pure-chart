@@ -14,6 +14,7 @@ class PointChart extends React.Component {
       this.props.maxValueOfData,
     )
 
+
     this.state = {
       loading: false,
       sortedData: newState.sortedData,
@@ -229,9 +230,14 @@ class PointChart extends React.Component {
   }
 
   drawCoordinates(data, seriesColor, seriesIndex) {
-    let result = []
+    let result = []    
     let lineStyle = {
-      borderColor: 'transparent'
+      borderColor: !seriesColor ? this.props.primaryColor : seriesColor
+    }
+    if(this.props.type === "point"){
+      lineStyle = {
+        borderColor: "transparent"
+      }
     }
     let dataLength = data.length
 
